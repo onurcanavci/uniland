@@ -1,7 +1,7 @@
-import { Box, CircularProgress, Container, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { Box, CircularProgress, Container, Typography } from "@mui/material";
+
 import CustomLand from "../../components/CustomLand";
-// import Grid from "../../components/Grid";
 import { customContract } from "../../constants/contractAbi";
 
 const Home = () => {

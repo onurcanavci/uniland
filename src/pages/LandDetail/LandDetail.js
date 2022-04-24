@@ -1,7 +1,8 @@
 import { Box, Container } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { UserContext } from "../../App";
 
 import CustomSubland from "../../components/CustomSubland";
 import { customContract } from "../../constants/contractAbi";
@@ -10,8 +11,10 @@ const LandDetail = () => {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const [grid, setGrid] = useState(null);
+  const { userAddress, setUserAddress } = useContext(UserContext);
 
   useEffect(() => {
+    console.log("userAddress: ", userAddress);
     setIsLoading(true);
     try {
       customContract.lands(location.state.id).then((response) => {
