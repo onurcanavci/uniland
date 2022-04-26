@@ -18,7 +18,8 @@ async function checkIfWalletIsConnected(onConnected) {
 }
 
 const MetaMaskAuth = () => {
-  const { userAddress, setUserAddress } = useContext(UserContext);
+  const { userAddress, setUserAddress, setUserSigner } =
+    useContext(UserContext);
   console.log("userAddress: ", userAddress);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const MetaMaskAuth = () => {
       Connected with <Address userAddress={userAddress} />
     </div>
   ) : (
-    <Connect setUserAddress={setUserAddress} />
+    <Connect setUserAddress={(setUserAddress, setUserSigner)} />
   );
 };
 
