@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Box, CircularProgress, Container, Typography } from "@mui/material";
 
 import CustomLand from "../../components/CustomLand";
-import { customContract } from "../../constants/contractAbi";
+import { customContract } from "../../contracts/contractUtils";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState(true);

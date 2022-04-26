@@ -1,12 +1,4 @@
-import { ethers } from "ethers";
-
-const provider = ethers.getDefaultProvider(
-  ethers.providers.getNetwork("ropsten")
-);
-
-const contractAddress = "0x48CA918a884C995E9cd2332D9927245A4EC4Fe5B";
-
-const contractAbi = [
+export const contractAbi = [
   {
     inputs: [{ internalType: "uint256", name: "land_size_", type: "uint256" }],
     stateMutability: "nonpayable",
@@ -402,19 +394,3 @@ const contractAbi = [
     type: "function",
   },
 ];
-
-export const getContractWithSigner = async () => {
-  const metamaskProvider = new ethers.providers.Web3Provider(
-    window.ethereum,
-    "any"
-  );
-  await metamaskProvider.send("eth_requestAccounts", []);
-  const signer = await metamaskProvider.getSigner();
-  return customContract.connect(signer);
-};
-
-export const customContract = new ethers.Contract(
-  contractAddress,
-  contractAbi,
-  provider
-);

@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
-import { getContractWithSigner } from "../../../../../constants/contractAbi";
+import { getContractWithSigner } from "../../../../../contracts/contractUtils";
 
-const Connect = ({ setUserAddress, setUserSigner }) => {
+const Connect = ({ setUserAddress, setContractWithSigner }) => {
   const connect = async () => {
     if (!window.ethereum) {
       alert("Get MetaMask!");
@@ -13,12 +13,7 @@ const Connect = ({ setUserAddress, setUserSigner }) => {
     });
 
     setUserAddress(account[0]);
-
-    getContractWithSigner()
-      .then((signer) => {
-        setUserSigner(signer);
-      })
-      .catch((e) => alert("An unexpected error occured!"));
+    setContractWithSigner(getContractWithSigner());
   };
 
   return (

@@ -5,17 +5,21 @@ const Router = lazy(() => import("./AppRouter"));
 export const UserContext = createContext({
   userAddress: "",
   setUserAddress: () => {},
-  userSigner: null,
-  setUserSigner: () => {},
+  contractWithSigner: null,
+  setContractWithSigner: () => {},
 });
 
 function App() {
   const [userAddress, setUserAddress] = useState(null);
-  const [userSigner, setUserSigner] = useState(null);
-
+  const [contractWithSigner, setContractWithSigner] = useState(null);
   const value = useMemo(
-    () => ({ userAddress, setUserAddress, userSigner, setUserSigner }),
-    [userAddress, userSigner]
+    () => ({
+      userAddress,
+      setUserAddress,
+      contractWithSigner,
+      setContractWithSigner,
+    }),
+    [contractWithSigner, userAddress]
   );
 
   return (

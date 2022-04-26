@@ -5,16 +5,18 @@ import { useParams } from "react-router-dom";
 import { UserContext } from "../../App";
 
 import CustomSubland from "../../components/CustomSubland";
-import { customContract } from "../../constants/contractAbi";
+import { customContract } from "../../contracts/contractUtils";
 
 const LandDetail = () => {
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const [grid, setGrid] = useState(null);
-  const { userAddress, setUserAddress } = useContext(UserContext);
+  const { userAddress, contractWithSigner } = useContext(UserContext);
 
   useEffect(() => {
     console.log("userAddress: ", userAddress);
+    console.log("contract: ", contractWithSigner);
+
     setIsLoading(true);
     try {
       customContract.lands(location.state.id).then((response) => {
