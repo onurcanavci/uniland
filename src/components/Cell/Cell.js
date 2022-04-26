@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Box, Button, CircularProgress, Tooltip } from "@mui/material";
-import { customContract } from "../../constants/contractAbi";
+import { customContract } from "../../contracts/contractUtils";
 import { UserContext } from "../../App";
 
 const Cell = ({ id, onClick }) => {

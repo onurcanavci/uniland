@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Box, Button, CircularProgress, Tooltip } from "@mui/material";
-import { customContract } from "../../constants/contractAbi";
+import { customContract } from "../../contracts/contractUtils";
 
 const SubLandCell = ({ mainLandId, id, onClick }) => {
   const [isLoading, setIsLoading] = useState(true);

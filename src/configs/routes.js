@@ -10,13 +10,13 @@ export const pages = [
   },
   {
     title: "Land Detail",
-    path: "/land-detail",
+    path: PAGE_URLS.LAND_DETAIL,
     isShowInMenu: false,
     component: lazy(() => import("../pages/LandDetail")),
   },
   {
     title: "Subland Detail",
-    path: "/subland-detail",
+    path: PAGE_URLS.SUBLAND_DETAIL,
     isShowInMenu: false,
     component: lazy(() => import("../pages/SublandDetail")),
   },
