@@ -403,6 +403,16 @@ const contractAbi = [
   },
 ];
 
+export const getContractWithSigner = async () => {
+  const metamaskProvider = new ethers.providers.Web3Provider(
+    window.ethereum,
+    "any"
+  );
+  await metamaskProvider.send("eth_requestAccounts", []);
+  const signer = await metamaskProvider.getSigner();
+  return customContract.connect(signer);
+};
+
 export const customContract = new ethers.Contract(
   contractAddress,
   contractAbi,

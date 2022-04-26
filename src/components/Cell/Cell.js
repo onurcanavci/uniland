@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, Button, CircularProgress, Tooltip } from "@mui/material";
 import { customContract } from "../../constants/contractAbi";
+import { UserContext } from "../../App";
 
 const Cell = ({ id, onClick }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [landName, setLandName] = useState("");
+  const [ownerOfCell, setOwnerOfCell] = useState(false);
+  const { userAddress } = useContext(UserContext);
 
   useEffect(() => {
     try {
@@ -39,6 +42,7 @@ const Cell = ({ id, onClick }) => {
           <Button
             variant={landName ? "contained" : "outlined"}
             size='small'
+            color={ownerOfCell ? "success" : "primary"}
             style={{ margin: "10px" }}
             onClick={() => onClick(id)}
           >
