@@ -171,7 +171,7 @@ const SublandDetail = () => {
             {
                 owner === userAddress && (
                     <form onSubmit={handleAuthorize}>
-                        <label>Mint this land:
+                        <label>Authorize this land:
                             <input
                                 type="text"
                                 placeholder="address"
