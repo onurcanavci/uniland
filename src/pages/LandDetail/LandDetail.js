@@ -15,6 +15,7 @@ const LandDetail = () => {
   const [owner, setOwner] = useState(null)
   const [admin, setAdmin] = useState(null)
   const [name, setName] = useState("");
+  const [url, setUrl] = useState("");
   const [transferAddress, setTransferAddress] = useState("");
   const [mintLandField, setMintLandField] = useState({
     to: null,
@@ -73,6 +74,15 @@ const LandDetail = () => {
     )
     await transactionHandle(tx, 'Land Name Updated')
   }
+  const handleUrlChange = async (event) => {
+    event.preventDefault();
+    const tx = await contractWithSigner.updateLandURL(
+        location.state.id,
+        url
+    )
+    await transactionHandle(tx, 'Land Url Updated')
+  }
+
   const handleTransferLand = async (event) => {
     event.preventDefault();
     const tx = await contractWithSigner.transferFrom(
@@ -126,6 +136,16 @@ const LandDetail = () => {
                       type="text"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
+                  />
+                </label>
+                <input type="submit" />
+              </form>
+              <form onSubmit={handleUrlChange}>
+                <label>Change Land URL:
+                  <input
+                      type="text"
+                      value={url}
+                      onChange={(e) => setUrl(e.target.value)}
                   />
                 </label>
                 <input type="submit" />
