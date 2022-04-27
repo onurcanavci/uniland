@@ -5,6 +5,7 @@ import { UserContext } from "../../App";
 
 import CustomSubland from "../../components/CustomSubland";
 import {customContract, getAdmin} from "../../contracts/contractUtils";
+import {BigNumber} from "ethers";
 
 const LandDetail = () => {
   const location = useLocation();
@@ -15,6 +16,12 @@ const LandDetail = () => {
   const [admin, setAdmin] = useState(null)
   const [name, setName] = useState("");
   const [transferAddress, setTransferAddress] = useState("");
+  const [mintLandField, setMintLandField] = useState({
+    to: null,
+    name: null,
+    url: null,
+    subland_size: null
+  });
   const { userAddress, contractWithSigner } = useContext(UserContext);
 
   useEffect(() => {
@@ -24,7 +31,7 @@ const LandDetail = () => {
     setIsLoading(true);
     try {
       getAdmin().then((response) => {
-        setAdmin(response)
+        setAdmin(response.toLowerCase())
       })
       customContract.lands(location.state.id).then((response) => {
         setLandInfo(response)
@@ -75,6 +82,18 @@ const LandDetail = () => {
     )
     await transactionHandle(tx, `Land transferred to ${transferAddress}`)
   }
+  const handleMintLand = async (event) => {
+    event.preventDefault();
+    console.log('mintLandFiel', mintLandField)
+    const tx = await contractWithSigner.mintLand(
+        mintLandField.to,
+        location.state.id,
+        mintLandField.name,
+        mintLandField.url,
+        mintLandField.subland_size
+    )
+    await transactionHandle(tx, `Land minted to ${mintLandField.to}`)
+  }
 
   if (isLoading) {
     return <p>Loading</p>;
@@ -122,6 +141,51 @@ const LandDetail = () => {
                 <input type="submit" />
               </form>
             </div>
+        )
+      }
+      {
+        userAddress === admin && owner === null && (
+        <form onSubmit={handleMintLand}>
+          <label>Mint this land:
+            <input
+              type="text"
+              placeholder="to"
+              value={mintLandField.to}
+              onChange={(e) => setMintLandField({
+                ...mintLandField,
+                to: e.target.value
+              })}
+            />
+            <input
+                type="text"
+                placeholder="name"
+                value={mintLandField.name}
+                onChange={(e) => setMintLandField({
+                  ...mintLandField,
+                  name: e.target.value
+                })}
+            />
+            <input
+                type="text"
+                placeholder="url"
+                value={mintLandField.url}
+                onChange={(e) => setMintLandField({
+                  ...mintLandField,
+                  url: e.target.value
+                })}
+            />
+            <input
+                type="text"
+                placeholder="subland_size"
+                value={mintLandField.subland_size}
+                onChange={(e) => setMintLandField({
+                  ...mintLandField,
+                  subland_size: BigNumber.from(e.target.value)
+                })}
+            />
+            </label>
+          <input type="submit" />
+        </form>
         )
       }
 
