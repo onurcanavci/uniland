@@ -21,3 +21,7 @@ export const customContract = new ethers.Contract(
   contractAbi,
   provider
 );
+
+export async function getAdmin() {
+  return await customContract.admin()
+}
