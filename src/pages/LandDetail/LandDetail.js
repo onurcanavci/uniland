@@ -29,8 +29,8 @@ const LandDetail = () => {
   const checkUrlType = (url) => {
     if (/\.(jpg|jpeg|png|webp|avif|gif|svg|html|com)$/.test(url)) {
       console.log("here: ");
-      setCurrentUrl("https://threejs.org/examples/css3d_youtube.html");
-      // setCurrentUrl(url);
+      // setCurrentUrl("https://threejs.org/examples/css3d_youtube.html");
+      setCurrentUrl(url);
     }
   };
 
