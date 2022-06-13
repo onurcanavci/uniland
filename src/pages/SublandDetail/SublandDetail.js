@@ -65,7 +65,7 @@ const SublandDetail = () => {
     }
     const currentTimestamp = Math.floor(Date.now() / 1000);
     return (
-      address === sublandInfo.authorized_address &&
+      address.toLowerCase() === sublandInfo.authorized_address.toLowerCase() &&
       currentTimestamp <= sublandInfo.authorized_until
     );
   };
@@ -86,8 +86,8 @@ const SublandDetail = () => {
         });
       console.log("mainlandId", history.state.mainLandId);
       customContract.ownerOf(history.state.mainLandId).then((ownerAddress) => {
+        console.log("ownerAddress: ", ownerAddress);
         setOwner(ownerAddress.toLowerCase());
-        console.log("owner", owner);
         console.log("user", userAddress);
         console.log(owner === userAddress);
       });
@@ -189,6 +189,7 @@ const SublandDetail = () => {
           allowFullScreen
         ></iframe>
       )}
+
       {(userAddress === owner || isAuthorized(userAddress)) && (
         <div>
           <form onSubmit={handleNameChange}>
